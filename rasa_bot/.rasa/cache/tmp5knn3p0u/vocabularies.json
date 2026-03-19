@@ -1,0 +1,46 @@
+{
+  "text": {
+    "hi": 8,
+    "hello": 6,
+    "hey": 7,
+    "good": 5,
+    "morning": 12,
+    "evening": 3,
+    "transfer": 17,
+    "money": 11,
+    "i": 9,
+    "want": 18,
+    "to": 16,
+    "send": 15,
+    "funds": 4,
+    "move": 13,
+    "need": 14,
+    "make": 10,
+    "a": 0,
+    "amount": 2,
+    "account": 1
+  },
+  "intent": {
+    "greet": 0,
+    "transfer_money": 1
+  },
+  "response": null,
+  "action_name": {
+    "action_listen": 6,
+    "action_restart": 7,
+    "action_session_start": 9,
+    "action_default_fallback": 4,
+    "action_deactivate_loop": 1,
+    "action_revert_fallback_events": 8,
+    "action_default_ask_affirmation": 2,
+    "action_default_ask_rephrase": 3,
+    "action_two_stage_fallback": 10,
+    "action_unlikely_intent": 11,
+    "action_back": 0,
+    "action_extract_slots": 5,
+    "transfer_form": 12,
+    "utter_transfer_success": 13
+  },
+  "action_text": null,
+  "intent_response_key": null
+}

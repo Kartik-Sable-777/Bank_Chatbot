@@ -1,0 +1,291 @@
+version: "3.1"
+
+# =========================================================
+# INTENTS
+# =========================================================
+
+intents:
+  - greet
+  - goodbye
+  - transfer_money
+  - check_balance
+  - block_card
+  - apply_loan
+  - cancel
+  - out_of_scope
+  - confirm
+  - deny
+  - login
+  - provide_account_number
+  - find_location
+  - transaction_history
+  - provide_date_range
+  - logout
+  - escalate
+
+
+# =========================================================
+# ENTITIES
+# =========================================================
+
+entities:
+  - amount
+  - account_number
+  - card_type
+  - location
+
+
+# =========================================================
+# SLOTS (STRICT + CONTROLLED)
+# =========================================================
+
+slots:
+
+  # ---------------- AUTH ----------------
+  account_number:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: login_form
+            requested_slot: account_number
+      - type: from_entity   # ✅ ADDED (handles detected numbers safely)
+        entity: account_number
+
+  is_authenticated:
+    type: bool
+    influence_conversation: true
+    mappings:
+      - type: custom
+
+  auth_pending_intent:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+
+
+  # ---------------- TRANSFER ----------------
+  amount:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: transfer_form
+            requested_slot: amount
+
+  recipient_account:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: transfer_form
+            requested_slot: recipient_account
+
+
+  # ---------------- LOAN ----------------
+  loan_type:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: loan_form
+            requested_slot: loan_type
+
+  loan_amount:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: loan_form
+            requested_slot: loan_amount
+
+
+  # ---------------- LOCATION ----------------
+  facility_type:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: location_form
+            requested_slot: facility_type
+
+  location:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: location_form
+            requested_slot: location
+
+
+  # ---------------- CARD ----------------
+  card_type:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: block_card_form
+            requested_slot: card_type
+
+  card_last4:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: block_card_form
+            requested_slot: card_last4
+
+
+  # ---------------- TRANSACTION ----------------
+  date_range:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: transaction_form
+            requested_slot: date_range
+
+
+  # ---------------- CONFIRMATION ----------------
+  confirmation_context:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: custom
+
+
+# =========================================================
+# RESPONSES (UNCHANGED)
+# =========================================================
+
+responses:
+
+  utter_greet:
+    - text: "Hello! Welcome to Helvetia AI. How can I help you today?"
+
+  utter_goodbye:
+    - text: "Thank you for using Helvetia AI. Have a great day!"
+
+  utter_ask_login_form_account_number:
+    - text: "Please provide your account number to securely operate operations on your account."
+
+  utter_ask_transfer_form_amount:
+    - text: "How much amount would you like to transfer?"
+
+  utter_ask_transfer_form_recipient_account:
+    - text: "To which account would you like to transfer?"
+
+  utter_confirm_transfer:
+    - text: "Do you confirm transfer of ₹{amount} to account {recipient_account}? (yes/no)"
+
+  utter_ask_loan_form_loan_type:
+    - text: "Which loan type would you like? (Home, Personal, Auto, Education)"
+
+  utter_ask_loan_form_loan_amount:
+    - text: "How much amount would you like to borrow?"
+
+  utter_confirm_loan:
+    - text: "You are applying for {loan_type} loan of ₹{loan_amount}. Type YES to confirm."
+
+  utter_ask_location_form_facility_type:
+    - text: "Are you looking for an ATM or a Branch?"
+
+  utter_ask_location_form_location:
+    - text: "Please share your city or area name."
+
+  utter_ask_block_card_form_card_type:
+    - text: "Is this a Debit or Credit card?"
+
+  utter_ask_block_card_form_card_last4:
+    - text: "Please provide the last 4 digits of your card."
+
+  utter_confirm_block_card:
+    - text: "I am about to block your {card_type} card ending in {card_last4}. Type YES to confirm."
+
+  utter_ask_transaction_form_date_range:
+    - text: "Do you want transactions from last 7 days or last 30 days?"
+
+  utter_cancel:
+    - text: "Operation cancelled."
+
+  utter_out_of_scope:
+    - text: "Sorry, I can only help with banking related queries like transfer, balance check, loan, ATM location etc."
+
+  utter_escalate:
+    - text: "I am transferring your request to a customer support representative. Please wait..."
+
+
+# =========================================================
+# FORMS (UNCHANGED)
+# =========================================================
+
+forms:
+  login_form:
+    required_slots:
+      - account_number
+
+  transfer_form:
+    required_slots:
+      - amount
+      - recipient_account
+
+  loan_form:
+    required_slots:
+      - loan_type
+      - loan_amount
+
+  location_form:
+    required_slots:
+      - facility_type
+      - location
+
+  block_card_form:
+    required_slots:
+      - card_type
+      - card_last4
+
+  transaction_form:
+    required_slots:
+      - date_range
+
+
+# =========================================================
+# ACTIONS (UNCHANGED)
+# =========================================================
+
+actions:
+  - action_authenticate_and_route
+  - action_authenticate_and_route_transactions
+  - action_login
+  - action_check_balance
+  - action_transfer_money
+  - action_set_transfer_context
+  - action_submit_loan
+  - action_set_loan_context
+  - action_block_card
+  - action_set_block_context
+  - action_show_locations
+  - action_show_transactions
+  - action_handle_confirmation
+  - action_handle_denial
+  - action_logout
+
+
+# =========================================================
+# SESSION (FIXED)
+# =========================================================
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: false

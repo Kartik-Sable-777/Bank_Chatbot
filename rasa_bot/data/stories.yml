@@ -1,0 +1,102 @@
+version: "3.1"
+
+stories:
+
+# =====================================================
+# GREETING
+# =====================================================
+
+- story: greet basic
+  steps:
+    - intent: greet
+    - action: utter_greet
+
+
+# =====================================================
+# LOGIN
+# =====================================================
+
+- story: login flow
+  steps:
+    - intent: login
+    - action: login_form
+    - active_loop: login_form
+    - active_loop: null
+    - action: action_login
+
+
+# =====================================================
+# BALANCE
+# =====================================================
+
+- story: check balance
+  steps:
+    - intent: check_balance
+    - action: action_authenticate_and_route
+
+
+- story: login then balance
+  steps:
+    - intent: login
+    - action: login_form
+    - active_loop: login_form
+    - active_loop: null
+    - action: action_login
+    - intent: check_balance
+    - action: action_authenticate_and_route
+
+
+# =====================================================
+# CONFIRMATION FLOWS ONLY
+# =====================================================
+
+- story: confirm action
+  steps:
+    - intent: confirm
+    - action: action_handle_confirmation
+
+
+- story: deny action
+  steps:
+    - intent: deny
+    - action: action_handle_denial
+
+
+# =====================================================
+# TRANSACTION HISTORY
+# =====================================================
+
+- story: transaction history
+  steps:
+    - intent: transaction_history
+    - action: action_authenticate_and_route_transactions
+
+
+# =====================================================
+# LOGOUT
+# =====================================================
+
+- story: logout
+  steps:
+    - intent: logout
+    - action: action_logout
+
+
+# =====================================================
+# ESCALATION
+# =====================================================
+
+- story: escalate
+  steps:
+    - intent: escalate
+    - action: utter_escalate
+
+
+# =====================================================
+# OUT OF SCOPE
+# =====================================================
+
+- story: out of scope
+  steps:
+    - intent: out_of_scope
+    - action: utter_out_of_scope

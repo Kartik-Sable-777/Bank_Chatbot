@@ -1,0 +1,14 @@
+{
+  "rule_only_slots": [
+    "loan_type",
+    "card_last4"
+  ],
+  "rule_only_loops": [
+    "transaction_form",
+    "location_form",
+    "loan_form",
+    "login_form",
+    "transfer_form",
+    "block_card_form"
+  ]
+}

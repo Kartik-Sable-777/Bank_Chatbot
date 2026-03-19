@@ -1,0 +1,27 @@
+{
+  "lookup": {
+    "rules": {
+      "[{\"active_loop\": {\"name\": \"should_not_be_set\"}, \"prev_action\": {\"action_name\": \"transfer_form\"}}]": "utter_transfer_success",
+      "[{\"active_loop\": {\"name\": \"should_not_be_set\"}, \"prev_action\": {\"action_name\": \"transfer_form\"}}, {\"active_loop\": {\"name\": \"should_not_be_set\"}, \"prev_action\": {\"action_name\": \"utter_transfer_success\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"transfer_money\"}}]": "transfer_form",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"transfer_money\"}}, {\"active_loop\": {\"name\": \"transfer_form\"}, \"prev_action\": {\"action_name\": \"transfer_form\"}, \"user\": {\"intent\": \"transfer_money\"}}]": "action_listen"
+    },
+    "rule_only_slots": [],
+    "rule_only_loops": [
+      "transfer_form"
+    ],
+    "rules_for_loop_unhappy_path": {
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}}, {\"active_loop\": {\"name\": \"transfer_form\"}, \"prev_action\": {\"action_name\": \"transfer_form\"}, \"user\": {\"intent\": \"transfer_money\"}}]": "do_not_predict_loop_action"
+    },
+    "rules_not_in_stories": [
+      "[{\"active_loop\": {\"name\": \"should_not_be_set\"}, \"prev_action\": {\"action_name\": \"transfer_form\"}}, {\"active_loop\": {\"name\": \"should_not_be_set\"}, \"prev_action\": {\"action_name\": \"utter_transfer_success\"}}]",
+      "handling active loops and forms - transfer_form",
+      "predicting default action with intent restart",
+      "[{\"active_loop\": {\"name\": \"should_not_be_set\"}, \"prev_action\": {\"action_name\": \"transfer_form\"}}]",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"transfer_money\"}}]",
+      "predicting default action with intent back",
+      "handling active loops and forms - transfer_form - action_listen",
+      "predicting default action with intent session_start"
+    ]
+  }
+}

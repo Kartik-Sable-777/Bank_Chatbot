@@ -1,0 +1,406 @@
+version: "3.1"
+
+# =========================================================
+# REGEX (IMPORTANT FOR NUMBERS)
+# =========================================================
+
+regex:
+- name: amount
+  pattern: \d+
+
+- name: account_number
+  pattern: \d{6,12}
+
+
+# =========================================================
+# LOOKUPS (IMPROVES ENTITY RECOGNITION)
+# =========================================================
+
+lookup:
+- name: card_type
+  examples: |
+    - debit
+    - credit
+
+- name: facility_type
+  examples: |
+    - atm
+    - branch
+
+
+# =========================================================
+# NLU TRAINING DATA
+# =========================================================
+
+nlu:
+
+# ================= GREET =================
+- intent: greet
+  examples: |
+    - hi
+    - hello
+    - hey
+    - hey there
+    - hi there
+    - hello there
+    - greetings
+    - good morning
+    - good afternoon
+    - good evening
+    - hi bot
+    - hey assistant
+    - hello assistant
+    - hi chatbot
+    - hey chatbot
+    - hello again
+    - hi again
+    - heyy
+    - hii
+    - heyyy
+    - yo
+    - what's up
+    - hey buddy
+    - hi friend
+
+
+# ================= GOODBYE =================
+- intent: goodbye
+  examples: |
+    - bye
+    - goodbye
+    - see you
+    - see you later
+    - exit
+    - quit
+    - close chat
+    - end chat
+    - bye bye
+    - catch you later
+    - ok bye
+    - thanks bye
+    - leaving now
+    - talk later
+
+
+# ================= LOGIN =================
+- intent: login
+  examples: |
+    - login
+    - log in
+    - sign in
+    - authenticate me
+    - login now
+    - login please
+    - I want to login
+    - I want to sign in
+    - access my account
+    - open my account
+    - verify my account
+    - log me in
+    - sign me in
+    - start login
+    - login account
+    - login to my account
+    - login with account [12345678](account_number)
+    - login [12345678](account_number)
+    - login to [87654321](account_number)
+    - sign in with [11112222](account_number)
+    - authenticate with [12345678](account_number)
+    - log into account [87654321](account_number)
+    - login using account number [12345678](account_number)
+    - login 12345678
+    - login 87654321
+    - login account 12345678
+    - login using 87654321
+    - log in 12345678
+    - sign in 87654321
+
+
+# ================= ACCOUNT NUMBER =================
+- intent: provide_account_number
+  examples: |
+    - [12345678](account_number)
+    - [87654321](account_number)
+    - [11112222](account_number)
+    - my account number is [12345678](account_number)
+    - account number is [87654321](account_number)
+    - here is my account number [12345678](account_number)
+    - it is [11112222](account_number)
+    - account id [12345678](account_number)
+    - my acc no is [87654321](account_number)
+    - 12345678
+    - 87654321
+    - 11112222
+    - 99999999
+    - 22223333
+    - 44445555
+    - account 12345678
+    - acc 87654321
+    - my acc is 11112222
+    - here 12345678
+
+
+# ================= BALANCE =================
+- intent: check_balance
+  examples: |
+    - check my balance
+    - show my balance
+    - what is my account balance
+    - how much money do I have
+    - balance enquiry
+    - tell me my balance
+    - show available balance
+    - what is left in my account
+    - remaining balance
+    - bank balance
+    - balance details
+    - how much balance is there
+    - can you show my balance
+    - check bank balance
+    - account balance please
+    - balance please
+    - available funds
+    - what funds do I have
+    - how much money is in my account
+    - what's my balance
+    - show balance
+    - check balance
+    - balance
+    - my balance
+    - account balance
+    - how much do i have
+    - money in account
+    - funds in account
+
+
+# ================= TRANSFER =================
+- intent: transfer_money
+  examples: |
+    - transfer money
+    - I want to transfer money
+    - send money
+    - send funds
+    - move money
+    - transfer funds
+    - make payment
+    - initiate transfer
+    - I want to send money
+    - transfer amount
+    - send amount
+    - transfer [5000](amount)
+    - send [2000](amount)
+    - transfer [10000](amount)
+    - move [3000](amount)
+    - pay someone
+    - send money to another account
+    - move funds to another account
+    - transfer money now
+    - send payment
+    - I want to pay someone
+    - transfer cash
+    - transfer 5000
+    - send 1000
+    - transfer funds quickly
+    - transfer
+    - send
+    - send money now
+    - transfer now
+    - transfer quickly
+    - send funds now
+
+
+# ================= BLOCK CARD =================
+- intent: block_card
+  examples: |
+    - block my card
+    - block debit card
+    - block credit card
+    - I lost my card
+    - freeze my card
+    - deactivate my card
+    - disable my ATM card
+    - my card is stolen
+    - stop my card
+    - block card urgently
+    - block card immediately
+    - I want to block my card
+    - my card is missing
+    - please freeze my card
+
+
+# ================= LOAN =================
+- intent: apply_loan
+  examples: |
+    - apply for loan
+    - I want a loan
+    - I need a loan
+    - apply for personal loan
+    - apply for home loan
+    - apply for car loan
+    - apply education loan
+    - loan application
+    - start loan process
+    - request a loan
+    - help me get a loan
+    - I want to borrow money
+    - loan
+    - need loan
+    - give me loan
+    - want loan
+    - loan please
+
+
+# ================= LOCATION =================
+- intent: find_location
+  examples: |
+    - find atm
+    - find branch
+    - nearest atm
+    - nearest branch
+    - atm near me
+    - branch near me
+    - show atm near me
+    - where is nearest atm
+    - locate atm nearby
+    - show bank branch
+    - ATM around my area
+    - find atm machine
+    - bank branch location
+    - find nearby branch
+    - atm
+    - branch
+    - atm pune
+    - branch pune
+    - atm nearby
+    - branch nearby
+
+
+# ================= TRANSACTIONS =================
+- intent: transaction_history
+  examples: |
+    - show my transactions
+    - transaction history
+    - recent transactions
+    - show account activity
+    - transaction details
+    - what are my recent transactions
+    - show me my transactions
+    - I want to see my transaction history
+    - account activity
+    - transaction statement
+    - show past transactions
+    - list my transactions
+    - payment history
+
+
+# ================= DATE RANGE =================
+- intent: provide_date_range
+  examples: |
+    - last 7 days
+    - last 30 days
+    - past week
+    - past month
+    - last week
+    - last month
+    - previous week
+    - previous month
+
+
+# ================= CONFIRM =================
+- intent: confirm
+  examples: |
+    - yes
+    - yes please
+    - confirm
+    - proceed
+    - okay
+    - sure
+    - go ahead
+    - continue
+    - do it
+    - that's fine
+    - yes go ahead
+    - that's correct
+    - yes do it
+    - ok proceed
+    - go on
+    - proceed with it
+
+
+# ================= DENY =================
+- intent: deny
+  examples: |
+    - no
+    - no thanks
+    - not now
+    - nope
+    - don't proceed
+    - stop that
+    - I changed my mind
+    - that's wrong
+    - no cancel
+    - don't do it
+    - stop it
+
+
+# ================= CANCEL =================
+- intent: cancel
+  examples: |
+    - cancel
+    - abort
+    - exit this
+    - stop operation
+    - cancel transaction
+    - cancel process
+    - never mind
+    - forget it
+    - cancel that
+
+
+# ================= LOGOUT =================
+- intent: logout
+  examples: |
+    - logout
+    - log me out
+    - sign out
+    - end my session
+    - exit account
+    - logut
+    - log out
+
+
+# ================= ESCALATE =================
+- intent: escalate
+  examples: |
+    - talk to human
+    - connect me to agent
+    - customer support
+    - speak to representative
+    - transfer to human
+
+
+# ================= OUT OF SCOPE =================
+- intent: out_of_scope
+  examples: |
+    - play music
+    - open youtube
+    - weather today
+    - tell me a joke
+    - what is the time
+    - who is president
+    - what is bgmi
+    - do you know bgmi
+    - audi rs7
+    - tell me about cars
+    - random text
+    - asdfghjkl
+    - qwertyuiop
+    - ajdnakjdn
+    - ewufhruwieaf
+    - aweiugfwsfs
+    - nonsense
+    - blah blah
+    - what is your name
+    - tell me a joke
+    - play music
+    - open youtube

@@ -1,0 +1,90 @@
+version: "3.1"
+
+language: en
+
+# =========================================================
+# NLU PIPELINE (INTENT + ENTITY DETECTION)
+# =========================================================
+
+pipeline:
+
+  # Tokenization
+  - name: WhitespaceTokenizer
+
+  # Regex helps detect numbers (account, amount)
+  - name: RegexFeaturizer
+
+  # Structural features
+  - name: LexicalSyntacticFeaturizer
+
+  # Word-level features
+  - name: CountVectorsFeaturizer
+    OOV_token: "__oov__"
+    token_pattern: '(?u)\b\w+\b'
+
+  # Character-level features (CRITICAL for numbers)
+  - name: CountVectorsFeaturizer
+    analyzer: char_wb
+    min_ngram: 2
+    max_ngram: 5
+
+  # Main classifier (brain)
+  - name: DIETClassifier
+    epochs: 220
+    learning_rate: 0.001
+    constrain_similarities: true
+    entity_recognition: true
+    model_confidence: softmax
+    batch_strategy: balanced
+    hidden_layers_sizes:
+      text: [256, 128]
+    embedding_dimension: 64
+    drop_rate: 0.2
+
+  # Synonym handling
+  - name: EntitySynonymMapper
+
+  # Response selector (future use)
+  - name: ResponseSelector
+    epochs: 100
+
+  # Fallback (STRICT → avoids random behavior)
+  - name: FallbackClassifier
+    threshold: 0.5
+    ambiguity_threshold: 0.1
+
+
+# =========================================================
+# DIALOGUE POLICIES (FLOW CONTROL)
+# =========================================================
+
+policies:
+
+  # Memorizes exact flows
+  - name: MemoizationPolicy
+    max_history: 10
+
+  # RULE CONTROL (MOST IMPORTANT)
+  - name: RulePolicy
+    core_fallback_threshold: 0.1
+    core_fallback_action_name: utter_out_of_scope
+    enable_fallback_prediction: true
+
+  # AI conversation policy
+  - name: TEDPolicy
+    max_history: 12
+    epochs: 220
+    constrain_similarities: true
+    learning_rate: 0.001
+
+  # Detect unexpected jumps
+  - name: UnexpecTEDIntentPolicy
+    max_history: 8
+    epochs: 120
+
+
+# =========================================================
+# META
+# =========================================================
+
+assistant_id: helvetia_ai_final_stable

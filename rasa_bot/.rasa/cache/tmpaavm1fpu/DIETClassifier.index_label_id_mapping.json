@@ -1,0 +1,19 @@
+{
+  "0": "apply_loan",
+  "1": "block_card",
+  "2": "cancel",
+  "3": "check_balance",
+  "4": "confirm",
+  "5": "deny",
+  "6": "escalate",
+  "7": "find_location",
+  "8": "goodbye",
+  "9": "greet",
+  "10": "login",
+  "11": "logout",
+  "12": "out_of_scope",
+  "13": "provide_account_number",
+  "14": "provide_date_range",
+  "15": "transaction_history",
+  "16": "transfer_money"
+}

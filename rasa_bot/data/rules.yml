@@ -1,0 +1,244 @@
+version: "3.1"
+
+rules:
+
+# =========================================================
+# BASIC INTERACTIONS
+# =========================================================
+
+- rule: greet user
+  steps:
+    - intent: greet
+    - action: utter_greet
+
+- rule: goodbye user
+  steps:
+    - intent: goodbye
+    - action: utter_goodbye
+
+- rule: cancel generic
+  steps:
+    - intent: cancel
+    - action: utter_cancel
+
+
+# =========================================================
+# LOGIN FLOW
+# =========================================================
+
+- rule: start login form
+  steps:
+    - intent: login
+    - action: login_form
+    - active_loop: login_form
+
+- rule: submit login form
+  condition:
+    - active_loop: login_form
+  steps:
+    - action: login_form
+    - active_loop: null
+    - action: action_login
+
+
+# 🔥 CRITICAL FIX (PREVENT FORM BREAK)
+
+- rule: handle account number in login form
+  condition:
+    - active_loop: login_form
+  steps:
+    - intent: provide_account_number
+    - action: login_form
+
+
+# =========================================================
+# AUTH REQUIRED ACTIONS
+# =========================================================
+
+- rule: balance requires authentication
+  steps:
+    - intent: check_balance
+    - action: action_authenticate_and_route
+
+- rule: transaction history requires authentication
+  steps:
+    - intent: transaction_history
+    - action: action_authenticate_and_route_transactions
+
+
+# =========================================================
+# TRANSFER FLOW
+# =========================================================
+
+- rule: start transfer form
+  steps:
+    - intent: transfer_money
+    - action: transfer_form
+    - active_loop: transfer_form
+
+- rule: submit transfer form
+  condition:
+    - active_loop: transfer_form
+  steps:
+    - action: transfer_form
+    - active_loop: null
+    - action: utter_confirm_transfer
+    - action: action_set_transfer_context
+
+
+# =========================================================
+# LOAN FLOW
+# =========================================================
+
+- rule: start loan form
+  steps:
+    - intent: apply_loan
+    - action: loan_form
+    - active_loop: loan_form
+
+- rule: submit loan form
+  condition:
+    - active_loop: loan_form
+  steps:
+    - action: loan_form
+    - active_loop: null
+    - action: utter_confirm_loan
+    - action: action_set_loan_context
+
+
+# =========================================================
+# BLOCK CARD FLOW
+# =========================================================
+
+- rule: start block card form
+  steps:
+    - intent: block_card
+    - action: block_card_form
+    - active_loop: block_card_form
+
+- rule: submit block card form
+  condition:
+    - active_loop: block_card_form
+  steps:
+    - action: block_card_form
+    - active_loop: null
+    - action: utter_confirm_block_card
+    - action: action_set_block_context
+
+
+# =========================================================
+# LOCATION FLOW
+# =========================================================
+
+- rule: start location form
+  steps:
+    - intent: find_location
+    - action: location_form
+    - active_loop: location_form
+
+- rule: submit location form
+  condition:
+    - active_loop: location_form
+  steps:
+    - action: location_form
+    - active_loop: null
+    - action: action_show_locations
+
+
+# =========================================================
+# TRANSACTION FORM
+# =========================================================
+
+- rule: submit transaction form
+  condition:
+    - active_loop: transaction_form
+  steps:
+    - action: transaction_form
+    - active_loop: null
+    - action: action_show_transactions
+
+
+# =========================================================
+# GLOBAL CONFIRMATION
+# =========================================================
+
+- rule: confirm action
+  condition:
+    - active_loop: null
+  steps:
+    - intent: confirm
+    - action: action_handle_confirmation
+
+- rule: deny action
+  condition:
+    - active_loop: null
+  steps:
+    - intent: deny
+    - action: action_handle_denial
+
+
+# =========================================================
+# FORM INTERRUPTION HANDLING
+# =========================================================
+
+- rule: cancel during loan form
+  condition:
+    - active_loop: loan_form
+  steps:
+    - intent: cancel
+    - action: action_deactivate_loop
+    - active_loop: null
+    - action: action_handle_denial
+
+- rule: cancel during block card form
+  condition:
+    - active_loop: block_card_form
+  steps:
+    - intent: cancel
+    - action: action_deactivate_loop
+    - active_loop: null
+    - action: action_handle_denial
+
+- rule: cancel during transfer form
+  condition:
+    - active_loop: transfer_form
+  steps:
+    - intent: cancel
+    - action: action_deactivate_loop
+    - active_loop: null
+    - action: action_handle_denial
+
+
+# =========================================================
+# LOGOUT
+# =========================================================
+
+- rule: logout user
+  steps:
+    - intent: logout
+    - action: action_logout
+
+
+# =========================================================
+# ESCALATION
+# =========================================================
+
+- rule: escalate to human
+  steps:
+    - intent: escalate
+    - action: utter_escalate
+
+
+# =========================================================
+# FALLBACK (CLEAN)
+# =========================================================
+
+- rule: out of scope
+  steps:
+    - intent: out_of_scope
+    - action: utter_out_of_scope
+
+- rule: fallback
+  steps:
+    - intent: nlu_fallback
+    - action: utter_out_of_scope

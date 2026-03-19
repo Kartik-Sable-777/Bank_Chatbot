@@ -1,0 +1,15 @@
+{
+  "0": "apply_loan",
+  "1": "block_card",
+  "2": "cancel",
+  "3": "check_balance",
+  "4": "confirm",
+  "5": "deny",
+  "6": "find_atm",
+  "7": "goodbye",
+  "8": "greet",
+  "9": "login",
+  "10": "out_of_scope",
+  "11": "provide_account_number",
+  "12": "transfer_money"
+}
