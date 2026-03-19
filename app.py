@@ -31,7 +31,7 @@ def correct_input(user_input):
 app = Flask(__name__)
 CORS(app)
 
-RASA_URL = "http://localhost:5005/webhooks/rest/webhook"
+RASA_URL = "https://ngrok.com/r/ai/webhooks/rest/webhook"
 
 
 # ============================
