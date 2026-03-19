@@ -38,7 +38,7 @@ RASA_URL = "http://localhost:5005/webhooks/rest/webhook"
 # MONGODB (FIXED SINGLE DB)
 # ============================
 
-client = MongoClient("mongodb://localhost:27017/")
+client = MongoClient("mongodb+srv://kartiksable777:kartiksable777@cluster0.1x4eth.mongodb.net/?appName=Cluster0")
 db = client["bankbot"]
 
 chat_collection = db["chat_logs"]
