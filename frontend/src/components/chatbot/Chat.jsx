@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import axios from "axios";
 
-const RASA_URL = "https://bank-chatbot-ev37.onrender.com";
+const RASA_URL = "https://bank-chatbot-ev37.onrender.com/chat";
 
 function Chat() {
   const [messages, setMessages] = useState([]);
