@@ -38,7 +38,7 @@ RASA_URL = "https://ngrok.com/r/ai/webhooks/rest/webhook"
 # MONGODB (FIXED SINGLE DB)
 # ============================
 
-client = MongoClient("mongodb+srv://kartiksable777:kartiksable777@cluster0.1x4eth.mongodb.net/?appName=Cluster0")
+client = MongoClient("mongodb+srv://kartiksable777:nWx2kgPepVmJgFhT@cluster0.1x4eth.mongodb.net/?appName=Cluster0")
 db = client["bankbot"]
 
 chat_collection = db["chat_logs"]
