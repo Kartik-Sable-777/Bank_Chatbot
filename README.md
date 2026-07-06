@@ -81,49 +81,54 @@ Traditional banking support is slow — customers wait on IVR calls or raise tic
 ### 🏠 Home Page
 
 <p align="center">
-  <img src="Screenshots/Home.png" alt="Home Page" width="900">
+  <img src="Screenshots/Home-light.png" alt="Home Page" width="900">
+  <img src="Screenshots/Home-dark.png" alt="Home Page" width="900">
+  <img src="Screenshots/Stocks.png" alt="Chat Interface" width="900">
 </p>
 
 ### 💬 Chat Interface
 
 <p align="center">
-  <img src="screenshots/chat-interface.png" alt="Chat Interface" width="900">
+  <img src="Screenshots/Chat1.png" alt="Chat Interface" width="900">
+  <img src="Screenshots/Chat2.png" alt="Chat Interface" width="900">
+  <img src="Screenshots/Chat3.png" alt="Chat Interface" width="900">
 </p>
 
-### 🤖 Chat Conversation
+### Login & SignUp
 
 <p align="center">
-  <img src="screenshots/chat-conversation.png" alt="Chat Conversation" width="900">
-</p>
-
-### 🔐 Admin Login
-
-<p align="center">
-  <img src="screenshots/admin-login.png" alt="Admin Login" width="900">
+  <img src="Screenshots/Login.png" alt="Chat Conversation" width="900">
+  <img src="Screenshots/Signup.png" alt="Chat Conversation" width="900">
 </p>
 
 ### 📊 Admin Dashboard
 
 <p align="center">
-  <img src="screenshots/admin-dashboard.png" alt="Admin Dashboard" width="900">
+  <img src="Screenshots/Admin-Dashboard.png" alt="Admin Dashboard" width="900">
 </p>
 
 ### 📝 FAQ Management
 
 <p align="center">
-  <img src="screenshots/faq-management.png" alt="FAQ Management" width="900">
+  <img src="Screenshots/Admin-FAQ.png" alt="FAQ Management" width="900">
 </p>
 
 ### 📂 Chat Logs
 
 <p align="center">
-  <img src="screenshots/chat-logs.png" alt="Chat Logs" width="900">
+  <img src="Screenshots/Admin-logs.png" alt="Chat Logs" width="900">
 </p>
 
 ### 📈 Usage Statistics
 
 <p align="center">
-  <img src="screenshots/stats.png" alt="Usage Statistics" width="900">
+  <img src="Screenshots/Admin-users.png" alt="Usage Statistics" width="900">
+</p>
+
+### 📈 Transactions History
+
+<p align="center">
+  <img src="Screenshots/Admin-transactions.png" alt="Usage Statistics" width="900">
 </p>
 
 ## 📁 Project Structure
@@ -217,8 +222,6 @@ The admin panel lets a bank representative:
 - Add unit tests for the Flask routes and Rasa NLU pipeline.
 - Support multi-language queries.
 - Add real transaction/account integration behind proper authentication for production use.
-
-## 👤 Author
 
 **Kartik Sable**
 - GitHub: [@Kartik-Sable-777](https://github.com/Kartik-Sable-777)
