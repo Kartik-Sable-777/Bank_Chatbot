@@ -81,7 +81,7 @@ Traditional banking support is slow — customers wait on IVR calls or raise tic
 ### 🏠 Home Page
 
 <p align="center">
-  <img src="screenshots/home.png" alt="Home Page" width="900">
+  <img src="Screenshots/Home.png" alt="Home Page" width="900">
 </p>
 
 ### 💬 Chat Interface
